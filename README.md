@@ -71,6 +71,6 @@ O projeto está configurado para deploy automático usando GitHub Actions. O flu
 
 ### Link de Produção
 
-A documentação da API em produção está disponível em: https://cms.domingosbraganha.tech/
+O ambiente de produção está disponível em: https://cms.domingosbraganha.tech/
 
 ![alt text](image.png)
