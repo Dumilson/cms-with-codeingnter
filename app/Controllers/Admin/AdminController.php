@@ -25,7 +25,7 @@ class AdminController extends BaseController
         ];
 
         return view('template/header', $data)
-            . view('Admin/dashboard', $data)
+            . view('admin/dashboard', $data)
             . view('template/footer', $data);
     }
 }
