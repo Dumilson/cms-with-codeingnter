@@ -12,7 +12,15 @@ class UserModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = [
+        'id',
+        'email',
+        'username',
+        'password_hash',
+        'created_at',
+        'updated_at',
+        'deleted_at'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -31,9 +39,9 @@ class UserModel extends Model
     protected $validationRules = [
         'email' => [
             'label' => 'Email',
-            'rules' => 'required|min_length[3]|max_length[20]'
+            'rules' => 'required|min_length[1]|max_length[255]'
         ],
-        'password' => [
+        'password_hash' => [
             'label' => 'Senha',
             'rules' => 'required|min_length[6]'
         ],
@@ -45,7 +53,7 @@ class UserModel extends Model
             'max_length' => 'O email não pode exceder 20 caracteres.',
             'is_unique' => 'Desculpe. Esse email já foi registrado. Por favor, escolha outro.',
         ],
-        'password' => [
+        'password_hash' => [
             'required' => 'O campo de senha é obrigatório.',
             'min_length' => 'A senha deve ter pelo menos 6 caracteres.',
         ],

@@ -43,10 +43,10 @@ class AuthController extends BaseController
         }
 
         $email = $this->request->getPost('email');
-        $password = $this->request->getPost('password');
+        $password_hash = $this->request->getPost('password_hash');
         $user = $this->model->where('email', $email)->first();
 
-        if (!$user || !password_verify($password, $user['password'])) {
+        if (!$user || !password_verify($password_hash, $user['password_hash'])) {
             return redirect()->back()->with('error', 'Usuário ou senha inválidos.');
         }
 
