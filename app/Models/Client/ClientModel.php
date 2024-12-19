@@ -41,7 +41,7 @@ class ClientModel extends Model
     protected $validationRules = [
         'name' => 'required|min_length[3]|max_length[255]',
         'email' => 'required|valid_email|max_length[255]|is_unique[clients.email,id,{id}]',
-        'phone' => 'required|min_length[10]|max_length[15]',
+        'phone' => 'required|min_length[6]|max_length[15]',
         'segment_id' => 'required|integer',
         'id' => 'permit_empty|integer',
     ];
