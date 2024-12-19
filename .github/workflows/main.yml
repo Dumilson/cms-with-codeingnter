@@ -18,4 +18,4 @@ jobs:
         server: ${{ secrets.ftp }}
         username: ${{ secrets.user }}
         password: ${{ secrets.pass }}
-        server-dir: /public_html/cms
+        server-dir: /public_html/cms/
