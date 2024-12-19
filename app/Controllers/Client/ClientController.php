@@ -45,7 +45,7 @@ class ClientController extends BaseController
         $clientEntity->fill($clientData);
 
         if ($this->model->createClient($clientEntity)) {
-            return redirect()->to('/client')->with('success', 'Client created successfully');
+            return redirect()->to('/client')->with('success', 'Cliente criado com sucesso');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->model->errors());
         }
@@ -58,7 +58,7 @@ class ClientController extends BaseController
             $data = $this->getViewData(['segments' => $this->modelSegment->findAll(), 'title' => 'Editar Cliente', 'client' => $client]);
             return $this->renderView('client/edit', $data);
         } else {
-            return redirect()->to('/client')->with('error', 'Client not found');
+            return redirect()->to('/client')->with('error', 'Cliente não encontrado');
         }
     }
 
@@ -76,7 +76,7 @@ class ClientController extends BaseController
         $clientEntity->fill($clientData);
 
         if ($this->model->updateClient($id, $clientEntity)) {
-            return redirect()->to('/client')->with('success', 'Client updated successfully');
+            return redirect()->to('/client')->with('success', 'Cliente atualizado com sucesso');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->model->errors());
         }
@@ -85,9 +85,9 @@ class ClientController extends BaseController
     public function delete($id)
     {
         if ($this->model->delete($id)) {
-            return redirect()->to('/client')->with('success', 'Client deleted successfully');
+            return redirect()->to('/client')->with('success', 'Cliente excluído com sucesso');
         } else {
-            return redirect()->to('/client')->with('error', 'Failed to delete client');
+            return redirect()->to('/client')->with('error', 'Falha ao excluir cliente');
         }
     }
 
