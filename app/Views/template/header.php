@@ -16,4 +16,6 @@
   }
   ?>
   <div class="container mt-4">
-    <h1 class="display-5"><?= $title ?? "CMS" ?></h1>
+    <?php if (isset($isLogin) and $isLogin == false): ?>
+      <h1 class="display-5"><?= $title ?? "CMS" ?></h1>
+    <?php endif; ?>
