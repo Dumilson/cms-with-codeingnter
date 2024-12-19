@@ -1,68 +1,61 @@
-# CodeIgniter 4 Application Starter
+# CMS Project
 
-## What is CodeIgniter?
+## Descrição
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Este é um projeto de CMS (Sistema de Gerenciamento de Conteúdo) desenvolvido com CodeIgniter 4.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Requisitos do Servidor
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- PHP versão 8.1 ou superior
+- MySQL 5 ou Superior
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Instalação
 
-## Installation & updates
+1. Clone o repositório para o seu ambiente local:
+    ```sh
+    git clone https://github.com/Dumilson/cms-with-codeingnter.git
+    cd cms-with-codeingnter
+    ```
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+2. Instale as dependências do Composer:
+    ```sh
+    composer install
+    ```
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+3. Copie o arquivo [env](http://_vscodecontentref_/0) para [.env](http://_vscodecontentref_/1) e configure as variáveis de ambiente conforme necessário:
+    ```sh
+    cp env .env
+    ```
 
-## Setup
+4. Configure o banco de dados no arquivo [.env](http://_vscodecontentref_/2):
+    ```env
+    database.default.hostname = 127.0.0.1
+    database.default.database = cms_test
+    database.default.username = root
+    database.default.password = 
+    database.default.DBDriver = MySQLi
+    database.default.DBPrefix =
+    database.default.port = 3306
+    ```
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+5. Execute as migrações para criar as tabelas no banco de dados:
+    ```sh
+    php spark migrate
+    ```
 
-## Important Change with index.php
+6. Execute os seeders para popular o banco de dados com dados iniciais:
+    ```sh
+    php spark db:seed DatabaseSeeder
+    ```
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## Executando o Projeto
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+1. Inicie o servidor de desenvolvimento:
+    ```sh
+    php spark serve
+    ```
 
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.1 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+2. Abra o navegador e acesse:
+    ```
+    http://localhost:8080
+    ```

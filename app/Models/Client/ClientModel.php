@@ -123,4 +123,12 @@ class ClientModel extends Model
         }
         return $rules;
     }
+
+    public function getClientCountBySegment()
+    {
+        return $this->select('segments.name as segment_name, COUNT(clients.id) as client_count')
+        ->join('segments', 'segments.id = clients.segment_id')
+        ->groupBy('segments.name')
+        ->findAll();
+    }
 }

@@ -3,22 +3,29 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
-use CodeIgniter\HTTP\ResponseInterface;
+use App\Models\Client\ClientModel;
+use App\Models\User\UserModel;
 
 class AdminController extends BaseController
 {
+
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new ClientModel();
+    }
+
     public function index()
     {
-
-
         $data = [
-            'clients' => [],
+            'clients' => $this->model->getClientCountBySegment(),
             'title' => 'Dashboard',
-            'isLogin' =>  false
+            'isLogin' => false
         ];
 
-        echo view('template/header', $data);
-        echo view('Admin/dashboard', $data);
-        echo view("template/footer", $data);
+        return view('template/header', $data)
+            . view('Admin/dashboard', $data)
+            . view('template/footer', $data);
     }
 }

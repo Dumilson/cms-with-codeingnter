@@ -21,35 +21,19 @@ class ClientController extends BaseController
     public function index()
     {
         $clients = $this->model->getAllClients();
-        $data = [
-            'clients' => $clients,
-            'title' => 'Clientes',
-            'isLogin' =>  false
-        ];
-
-        echo view('template/header', $data);
-        echo view('client/index', $data);
-        echo view("template/footer", $data);
+        $data = $this->getViewData(['clients' => $clients, 'title' => 'Clientes']);
+        return $this->renderView('client/index', $data);
     }
-
 
     public function create()
     {
-        $data = [
-            'segments' => $this->modelSegment->findAll(),
-            'title' => 'Cadastro de Clientes',
-            'isLogin' =>  false
-        ];
-        echo view('template/header', $data);
-        echo  view('client/create');
-        echo view("template/footer", $data);
+        $data = $this->getViewData(['segments' => $this->modelSegment->findAll(), 'title' => 'Cadastro de Clientes']);
+        return $this->renderView('client/create', $data);
     }
 
     public function store()
     {
-
         $clientData = $this->request->getPost();
-
         $validation = \Config\Services::validation();
         $validation->setRules($this->model->validationRules, $this->model->getValidationMessages());
 
@@ -71,39 +55,27 @@ class ClientController extends BaseController
     {
         $client = $this->model->find($id);
         if ($client) {
-            $data = [
-                'segments' => $this->modelSegment->findAll(),
-                'title' => 'Editar Cliente',
-                'client' => $client,
-                'isLogin' =>  false
-            ];
-            echo view('template/header', $data);
-            echo view('client/edit', $data);
-            echo view("template/footer", $data);
+            $data = $this->getViewData(['segments' => $this->modelSegment->findAll(), 'title' => 'Editar Cliente', 'client' => $client]);
+            return $this->renderView('client/edit', $data);
         } else {
             return redirect()->to('/client')->with('error', 'Client not found');
         }
     }
 
-
-
     public function update($id)
     {
         $clientData = $this->request->getPost();
         $validation = \Config\Services::validation();
-
         $validation->setRules($this->model->getCustomValidationRules($id), $this->model->getValidationMessages());
 
         if (!$validation->withRequest($this->request)->run()) {
             return redirect()->back()->withInput()->with('errors', $validation->getErrors());
         }
 
-
         $clientEntity = new ClientEntity();
         $clientEntity->fill($clientData);
-    
-        if ($this->model->updateClient($id, $clientEntity)) {
 
+        if ($this->model->updateClient($id, $clientEntity)) {
             return redirect()->to('/client')->with('success', 'Client updated successfully');
         } else {
             return redirect()->back()->withInput()->with('errors', $this->model->errors());
@@ -117,5 +89,17 @@ class ClientController extends BaseController
         } else {
             return redirect()->to('/client')->with('error', 'Failed to delete client');
         }
+    }
+
+    private function getViewData(array $additionalData = [])
+    {
+        return array_merge(['isLogin' => false], $additionalData);
+    }
+
+    private function renderView(string $view, array $data)
+    {
+        echo view('template/header', $data);
+        echo view($view, $data);
+        echo view('template/footer', $data);
     }
 }

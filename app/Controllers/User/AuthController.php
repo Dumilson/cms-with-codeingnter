@@ -28,9 +28,9 @@ class AuthController extends BaseController
             'isLogin' => true
         ];
 
-        echo view('template/header', $data);
-        echo view('auth/login');
-        echo view('template/footer', $data);
+        return view('template/header', $data)
+            . view('auth/login')
+            . view('template/footer', $data);
     }
 
     public function login()
@@ -46,12 +46,8 @@ class AuthController extends BaseController
         $password = $this->request->getPost('password');
         $user = $this->model->where('email', $email)->first();
 
-        if (!$user) {
-            return redirect()->back()->with('error', 'Usuário não encontrado.');
-        }
-
-        if (!password_verify($password, $user['password'])) {
-            return redirect()->back()->with('error', 'Senha inválida.');
+        if (!$user || !password_verify($password, $user['password'])) {
+            return redirect()->back()->with('error', 'Usuário ou senha inválidos.');
         }
 
         $userEntity = new UserEntity($user);
@@ -65,7 +61,6 @@ class AuthController extends BaseController
 
     public function logout()
     {
-
         $this->auth->logout();
         session()->destroy();
         return redirect()->to('auth/login');
