@@ -60,7 +60,6 @@ Este é um projeto de CMS (Sistema de Gerenciamento de Conteúdo) desenvolvido c
     http://localhost:8080
     ```
 
-
 # Processo de Deploy
 
 O projeto está configurado para deploy automático usando GitHub Actions. O fluxo de trabalho é o seguinte:

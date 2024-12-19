@@ -24,7 +24,7 @@
         </div>
         <div class="form-group mb-3">
           <label for="password_hash">Senha</label>
-          <input type="password_hash" class="form-control <?= isset(session('errors')['password_hash']) ? 'is-invalid' : '' ?>" id="password_hash" name="password_hash" required>
+          <input type="password" class="form-control <?= isset(session('errors')['password_hash']) ? 'is-invalid' : '' ?>" id="password_hash" name="password_hash" required>
           <?php if (is_array(session('errors')) && isset(session('errors')['password_hash'])): ?>
             <div class="invalid-feedback">
               <?= session('errors')['password_hash']; ?>
