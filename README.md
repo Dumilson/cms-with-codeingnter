@@ -59,3 +59,18 @@ Este é um projeto de CMS (Sistema de Gerenciamento de Conteúdo) desenvolvido c
     ```
     http://localhost:8080
     ```
+
+
+# Processo de Deploy
+
+O projeto está configurado para deploy automático usando GitHub Actions. O fluxo de trabalho é o seguinte:
+
+1. Todas as atualizações devem ser feitas na branch `develop`.
+2. Quando as alterações estiverem prontas para ir para produção, abra um Pull Request da branch `develop` para a branch `master`.
+3. Quando o Pull Request for aprovado e mesclado na branch `master`, o GitHub Actions iniciará o processo de deploy automaticamente.
+
+### Link de Produção
+
+A documentação da API em produção está disponível em: https://cms.domingosbraganha.tech/
+
+![alt text](image.png)
